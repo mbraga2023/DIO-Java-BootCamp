@@ -4,8 +4,8 @@ public class SmartTv {
     public static void main(String[] args) throws Exception {
         System.out.println("Sistema Smart TV");
 
-        Scanner scanner = new Scanner(System.in); // Moved outside the loop
-        boolean menu = true; // Added menu variable
+        Scanner scanner = new Scanner(System.in); 
+        boolean menu = true; 
         
         Controle controle = new Controle();
 
@@ -84,5 +84,6 @@ public class SmartTv {
                     break;
             }
         }
+        scanner.close();
     }
 }

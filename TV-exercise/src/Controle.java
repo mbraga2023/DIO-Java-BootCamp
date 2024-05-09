@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Controle {
     boolean estaLigada=true;
     int canal =1;

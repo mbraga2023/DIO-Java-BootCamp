@@ -14,19 +14,19 @@ public class Contador {
 
                 if (parametroUm < parametroDois) {
                     contar(parametroUm, parametroDois);
-                    break; // If no exception occurred, break out of the loop
+                    break;
                 } else {
                     throw new IllegalArgumentException("O segundo parâmetro deve ser maior que o primeiro");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
-                terminal.nextLine(); // Consume the invalid input
+                terminal.nextLine();
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
         }
 
-        terminal.close(); // Close the scanner when done
+        terminal.close();
     }
 
     static void contar(int parametroUm, int parametroDois) {
@@ -38,7 +38,7 @@ public class Contador {
             int contagem = parametroDois - parametroUm;
             System.out.println("Resultado: " + contagem);
             for (int i = parametroUm; i < parametroDois; i++) {
-                System.out.println(i);
+                System.out.println("imprimindo" + i);
             }
         } catch (ParametrosInvalidosException e) {
             System.out.println(e.getMessage());

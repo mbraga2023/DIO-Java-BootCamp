@@ -15,3 +15,5 @@ controle-de-fluxo/.vscode/settings.json
 out/production/Iphone-Interface-exercise/AparelhoTelefonico.class
 out/production/Iphone-Interface-exercise/NavegadorInternet.class
 out/production/Iphone-Interface-exercise/ReprodutorMusical.class
+out/production/Collections/list/operacoesBasicas/ordenacao_pessoas/OrdenacaoPessoas.class
+*.class

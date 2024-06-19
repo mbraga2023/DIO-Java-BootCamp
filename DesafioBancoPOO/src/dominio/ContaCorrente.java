@@ -9,12 +9,14 @@ public class ContaCorrente extends Conta {
     @Override
     public void depositar(double valor) {
         saldo += valor;
+        registrarExtrato("Depósito", valor, saldo);
     }
 
     @Override
     public void sacar(double valor) {
         if (saldo >= valor) {
             saldo -= valor;
+            registrarExtrato("Saque", -valor, saldo);
         } else {
             System.out.println("Saldo insuficiente para saque.");
         }
@@ -26,6 +28,8 @@ public class ContaCorrente extends Conta {
             if (saldo >= valor) {
                 saldo -= valor;
                 destino.depositar(valor);
+                registrarExtrato("Transferência - Enviado", -valor, saldo);
+                destino.registrarExtrato("Transferência - Recebido", valor, destino.getSaldo());
             } else {
                 System.out.println("Saldo insuficiente para transferência.");
             }

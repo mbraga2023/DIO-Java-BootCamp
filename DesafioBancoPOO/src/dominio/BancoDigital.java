@@ -28,6 +28,27 @@ public class BancoDigital {
         System.out.println("Conta criada para o cliente: " + cliente.getNome());
     }
 
+    public void extratoConta(String numeroConta) {
+        boolean found = false;
+        for (Cliente cliente : clientes) {
+            for (Conta conta : cliente.getContas()) {
+                if (conta.getNumeroConta().equals("CC" + numeroConta)) {
+                    found = true;
+                    System.out.println("Extrato da Conta " + conta.getNumeroConta());
+                    List<Extrato> extratos = conta.getExtratos();
+                    for (Extrato extrato : extratos) {
+                        System.out.println(extrato);
+                    }
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        if (!found) {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+
     public void listarClientes() {
         System.out.println("Clientes do Banco:");
         for (Cliente cliente : clientes) {

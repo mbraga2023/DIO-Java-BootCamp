@@ -1,19 +1,27 @@
 package dominio;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Conta {
     protected String tipoConta;
     protected String numeroConta;
     protected double saldo;
+    protected List<Extrato> extratos;
 
     public Conta(String tipoConta, double saldoInicial) {
         this.tipoConta = tipoConta;
         this.saldo = saldoInicial;
         this.numeroConta = gerarNumeroConta(); // Generate a new account number
+        this.extratos = new ArrayList<>();
+        registrarExtrato("Depósito inicial", saldoInicial, saldoInicial);
     }
 
-    // Abstract methods for depositar, sacar, transferir
+    public abstract void depositar(double valor);
+
+    public abstract void sacar(double valor);
+
+    public abstract void transferir(Conta destino, double valor);
 
     public String getTipoConta() {
         return tipoConta;
@@ -27,21 +35,22 @@ public abstract class Conta {
         return saldo;
     }
 
+    public List<Extrato> getExtratos() {
+        return extratos;
+    }
+
+    public void setExtratos(List<Extrato> extratos) {
+        this.extratos = extratos;
+    }
+
     // Method to generate a random 4-digit account number
     private String gerarNumeroConta() {
-        Random random = new Random();
-        int numConta = random.nextInt(9000) + 1000; // Generate number between 1000 and 9999
-        return "Conta: " + numConta; // Example: CC1234
+        int numConta = (int) (Math.random() * (9999 - 1000 + 1)) + 1000; // Random number between 1000 and 9999
+        return "CC" + numConta; // Example: CC1234
     }
 
-    // Setter for numeroConta (if needed)
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
+    protected void registrarExtrato(String tipoTransacao, double valorTransacao, double saldoAposTransacao) {
+        Extrato extrato = new Extrato(tipoTransacao, valorTransacao, saldoAposTransacao);
+        extratos.add(extrato);
     }
-
-    public abstract void depositar(double valor);
-
-    public abstract void sacar(double valor);
-
-    public abstract void transferir(Conta destino, double valor);
 }

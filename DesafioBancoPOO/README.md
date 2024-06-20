@@ -1,7 +1,7 @@
 # Banco Digital - Sistema Bancário Simples
 
 
-![Banco Digital](/src/diagrama-classes.png)
+![Banco Digital](src/diagrama-classes.png)
 Diagrama de classes
 
 ## Descrição

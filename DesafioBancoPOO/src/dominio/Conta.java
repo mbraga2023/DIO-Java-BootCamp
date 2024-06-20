@@ -17,19 +17,13 @@ public abstract class Conta {
         registrarExtrato("Depósito", saldoInicial, saldoInicial);
     }
 
-    public void deposit(double valor) {
-        saldo += valor;
-        registrarExtrato("Depósito", valor, saldo);
-    }
+    public abstract void deposito(double valor);
 
     public abstract void sacar(double valor);
-
-    public abstract void transferir(Conta destino, double valor);
 
     public String getTipoConta() {
         return tipoConta;
     }
-
     public String getNumeroConta() {
         return numeroConta;
     }

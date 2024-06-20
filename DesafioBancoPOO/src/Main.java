@@ -101,6 +101,7 @@ public class Main {
         scanner.nextLine(); // Consume newline character
 
         banco.depositar(numeroConta, valorDeposito);
+
     }
 
     private static void realizarSaque(BancoDigital banco, Scanner scanner) {
@@ -111,25 +112,7 @@ public class Main {
         double valorSaque = scanner.nextDouble();
         scanner.nextLine(); // Consume newline character
 
-        boolean contaEncontrada = false;
-
-        for (Cliente cliente : banco.getClientes()) {
-            for (Conta conta : cliente.getContas()) {
-                if (conta.getNumeroConta().equals("CC" + numeroConta)) {
-                    conta.sacar(valorSaque);
-                    System.out.println("Saque de R$ " + valorSaque + " realizado com sucesso na conta " + numeroConta);
-                    contaEncontrada = true;
-                    break;
-                }
-            }
-            if (contaEncontrada) {
-                break;
-            }
-        }
-
-        if (!contaEncontrada) {
-            System.out.println("Conta não encontrada.");
-        }
+        banco.sacar(numeroConta, valorSaque);
     }
 
 
@@ -142,9 +125,10 @@ public class Main {
 
         System.out.print("Informe o valor da transferência: ");
         double valorTransferencia = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine();
 
-        // Implementação do método transferir() em BancoDigital
+        banco.depositar(numeroContaDestino, valorTransferencia);
+        banco.sacar(numeroContaOrigem, valorTransferencia);
     }
 
     private static void criarClienteDummy(BancoDigital banco) {

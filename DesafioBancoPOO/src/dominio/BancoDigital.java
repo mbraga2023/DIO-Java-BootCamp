@@ -66,7 +66,7 @@ public class BancoDigital extends Banco {
         for (Cliente cliente : clientes) {
             for (Conta conta : cliente.getContas()) {
                 if (conta.getNumeroConta().equals("CC" + numeroConta)) {
-                    conta.deposit(valorDeposito);
+                    conta.deposito(valorDeposito);
                     System.out.println("Depósito de R$ " + valorDeposito + " realizado com sucesso na conta " + numeroConta);
                     contaEncontrada = true;
                     break;
@@ -80,6 +80,27 @@ public class BancoDigital extends Banco {
             System.out.println("Conta não encontrada.");
         }
     }
+
+    public void sacar(String numeroConta, double valorDeposito) {
+        boolean contaEncontrada = false;
+        for (Cliente cliente : clientes) {
+            for (Conta conta : cliente.getContas()) {
+                if (conta.getNumeroConta().equals("CC" + numeroConta)) {
+                    conta.sacar(valorDeposito);
+                    System.out.println("Saque de R$ " + valorDeposito + " realizado com sucesso na conta " + numeroConta);
+                    contaEncontrada = true;
+                    break;
+                }
+            }
+            if (contaEncontrada) {
+                break;
+            }
+        }
+        if (!contaEncontrada) {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+
 
     public List<Cliente> getClientes() {
         return clientes;

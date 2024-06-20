@@ -15,20 +15,11 @@ public class ContaCorrente extends Conta {
             System.out.println("Saldo insuficiente para saque.");
         }
     }
-
     @Override
-    public void transferir(Conta destino, double valor) {
-        if (destino instanceof ContaCorrente || destino instanceof ContaPoupanca) {
-            if (saldo >= valor) {
-                saldo -= valor;
-                destino.deposit(valor);
-                registrarExtrato("Transferência - Enviado", -valor, saldo);
-                destino.registrarExtrato("Transferência - Recebido", valor, destino.getSaldo());
-            } else {
-                System.out.println("Saldo insuficiente para transferência.");
-            }
-        } else {
-            System.out.println("Tipo de conta destino inválido para transferência.");
-        }
+    public void deposito(double valor) {
+        saldo += valor;
+        registrarExtrato("Depósito", valor, saldo);
     }
+
+
 }

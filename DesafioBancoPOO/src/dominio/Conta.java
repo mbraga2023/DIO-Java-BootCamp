@@ -14,10 +14,13 @@ public abstract class Conta {
         this.saldo = saldoInicial;
         this.numeroConta = gerarNumeroConta(); // Generate a new account number
         this.extratos = new ArrayList<>();
-        registrarExtrato("Depósito inicial", saldoInicial, saldoInicial);
+        registrarExtrato("Depósito", saldoInicial, saldoInicial);
     }
 
-    public abstract void depositar(double valor);
+    public void deposit(double valor) {
+        saldo += valor;
+        registrarExtrato("Depósito", valor, saldo);
+    }
 
     public abstract void sacar(double valor);
 

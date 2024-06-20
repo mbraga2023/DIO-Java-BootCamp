@@ -3,13 +3,14 @@ package dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BancoDigital {
+public class BancoDigital extends Banco {
     private List<Cliente> clientes;
 
     public BancoDigital() {
         this.clientes = new ArrayList<>();
     }
 
+    @Override
     public void criarConta(String nomeCliente, String tipoConta, double depositoInicial) {
         Cliente cliente = new Cliente(nomeCliente);
 
@@ -42,7 +43,9 @@ public class BancoDigital {
                     break;
                 }
             }
-            if (found) break;
+            if (found) {
+                break;
+            }
         }
         if (!found) {
             System.out.println("Conta não encontrada.");
@@ -56,5 +59,33 @@ public class BancoDigital {
             cliente.listarContas();
             System.out.println(); // Blank line between clients
         }
+    }
+
+    public void depositar(String numeroConta, double valorDeposito) {
+        boolean contaEncontrada = false;
+        for (Cliente cliente : clientes) {
+            for (Conta conta : cliente.getContas()) {
+                if (conta.getNumeroConta().equals("CC" + numeroConta)) {
+                    conta.deposit(valorDeposito);
+                    System.out.println("Depósito de R$ " + valorDeposito + " realizado com sucesso na conta " + numeroConta);
+                    contaEncontrada = true;
+                    break;
+                }
+            }
+            if (contaEncontrada) {
+                break;
+            }
+        }
+        if (!contaEncontrada) {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 }

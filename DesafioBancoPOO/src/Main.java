@@ -1,4 +1,6 @@
 import dominio.BancoDigital;
+import dominio.Cliente;
+import dominio.Conta;
 
 import java.util.Scanner;
 
@@ -6,6 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         BancoDigital banco = new BancoDigital();
+        criarClienteDummy(banco);
+
         Scanner scanner = new Scanner(System.in);
         boolean menu = true;
 
@@ -30,13 +34,13 @@ public class Main {
                     criarConta(banco, scanner);
                     break;
                 case 2:
-                    // Implement deposit method
+                    realizarDeposito(banco, scanner);
                     break;
                 case 3:
-                    // Implement withdraw method
+                    realizarSaque(banco, scanner);
                     break;
                 case 4:
-                    // Implement transfer method
+                    realizarTransferencia(banco, scanner);
                     break;
                 case 5:
                     banco.listarClientes();
@@ -86,5 +90,65 @@ public class Main {
 
         banco.criarConta(nomeCliente, tipoConta, depositoInicial);
         System.out.println();
+    }
+
+    private static void realizarDeposito(BancoDigital banco, Scanner scanner) {
+        System.out.print("Informe o número da conta: ");
+        String numeroConta = scanner.nextLine();
+
+        System.out.print("Informe o valor do depósito: ");
+        double valorDeposito = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline character
+
+        banco.depositar(numeroConta, valorDeposito);
+    }
+
+    private static void realizarSaque(BancoDigital banco, Scanner scanner) {
+        System.out.print("Informe o número da conta: ");
+        String numeroConta = scanner.nextLine();
+
+        System.out.print("Informe o valor do saque: ");
+        double valorSaque = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline character
+
+        boolean contaEncontrada = false;
+
+        for (Cliente cliente : banco.getClientes()) {
+            for (Conta conta : cliente.getContas()) {
+                if (conta.getNumeroConta().equals("CC" + numeroConta)) {
+                    conta.sacar(valorSaque);
+                    System.out.println("Saque de R$ " + valorSaque + " realizado com sucesso na conta " + numeroConta);
+                    contaEncontrada = true;
+                    break;
+                }
+            }
+            if (contaEncontrada) {
+                break;
+            }
+        }
+
+        if (!contaEncontrada) {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+
+
+    private static void realizarTransferencia(BancoDigital banco, Scanner scanner) {
+        System.out.print("Informe o número da conta de origem: ");
+        String numeroContaOrigem = scanner.nextLine();
+
+        System.out.print("Informe o número da conta de destino: ");
+        String numeroContaDestino = scanner.nextLine();
+
+        System.out.print("Informe o valor da transferência: ");
+        double valorTransferencia = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline character
+
+        // Implementação do método transferir() em BancoDigital
+    }
+
+    private static void criarClienteDummy(BancoDigital banco) {
+        banco.criarConta("Cliente1", "Corrente", 2000.0); // Example initialization with dummy data
+        banco.criarConta("Cliente2", "Poupança", 3000.0); // Example initialization with dummy data
     }
 }

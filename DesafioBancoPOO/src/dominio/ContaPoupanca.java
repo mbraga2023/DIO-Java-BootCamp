@@ -7,12 +7,6 @@ public class ContaPoupanca extends Conta {
     }
 
     @Override
-    public void depositar(double valor) {
-        saldo += valor;
-        registrarExtrato("Depósito", valor, saldo);
-    }
-
-    @Override
     public void sacar(double valor) {
         if (saldo >= valor) {
             saldo -= valor;
@@ -27,7 +21,7 @@ public class ContaPoupanca extends Conta {
         if (destino instanceof ContaPoupanca) {
             if (saldo >= valor) {
                 saldo -= valor;
-                destino.depositar(valor);
+                destino.deposit(valor);
                 registrarExtrato("Transferência - Enviado", -valor, saldo);
                 destino.registrarExtrato("Transferência - Recebido", valor, destino.getSaldo());
             } else {
